@@ -109,4 +109,4 @@ MonoBehaviour:
   - {fileID: 3209264743184958988}
   - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
   - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
-  weight: 5
+  weight: 50

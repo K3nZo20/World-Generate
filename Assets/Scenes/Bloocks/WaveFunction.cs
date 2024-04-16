@@ -40,7 +40,6 @@ public class WaveFunction : MonoBehaviour
                 Cell newCell = Instantiate(cellObj, new Vector2(x, y), Quaternion.identity);
                 newCell.CreateCell(false, tileObjects);
                 gridComponents.Add(newCell);
-                
             }
         }
 
@@ -51,8 +50,9 @@ public class WaveFunction : MonoBehaviour
     IEnumerator CheckEntropy()
     {
         List<Cell> tempGrid = new List<Cell>(gridComponents);
+
         tempGrid.RemoveAll(c => c.collapsed);
-        
+
         tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
 
         int arrLength = tempGrid[0].tileOptions.Length;
@@ -78,23 +78,26 @@ public class WaveFunction : MonoBehaviour
     }
 
     void CollapseCell(List<Cell> tempGrid)
-    {   
+    {
         // Obliczanie sumy wag dla wszystkich dostępnych płytek
-        float totalWeight = tempGrid.Sum(cell => cell.tileOptions.Sum(tile => tile.getWeight()));
+        // float totalWeight = tempGrid.Sum(cell => cell.tileOptions.Sum(tile => tile.getWeight()));
+        // print(totalWeight);
 
-        // Losowanie liczby z przedziału [0, totalWeight)
-        float randomValue = UnityEngine.Random.Range(0, totalWeight);
+        // // Losowanie liczby z przedziału [0, totalWeight)
+        // float randomValue = UnityEngine.Random.Range(0, totalWeight);
 
-        float cumulativeWeight = 0;
+        int cumulativeWeight = 0;
         Tile selectedTile = null;
 
-        // Iterowanie po dostępnych komórkach
+        // Iterowanie po komórkach w kolejności
         foreach (Cell cell in tempGrid)
         {
+            int totalWeight = (int)(cell.tileOptions.Sum(tile => tile.getWeight()));
+            int randomValue = (int)UnityEngine.Random.Range(0, totalWeight-1);
             // Iterowanie po dostępnych płytkach w komórce
-            foreach (Tile tile in cell.tileOptions)
+            foreach (Tile tile in cell.tileOptions.OrderBy(t => Guid.NewGuid()))
             {
-                cumulativeWeight += tile.getWeight();
+                cumulativeWeight += (int)tile.getWeight();
 
                 // Jeśli kumulatywna waga przekroczy losową wartość, wybierz tę płytkę
                 if (cumulativeWeight >= randomValue)
@@ -104,30 +107,30 @@ public class WaveFunction : MonoBehaviour
                 }
             }
 
+            // Jeśli płytka została wybrana, przerwij iterację
             if (selectedTile != null)
             {
-                break; // Przerwij iterację, jeśli płytka została wybrana
-            }
-
-            else
-            {
-                
-                if (cell.tileOptions.Length > 0)
-                {
-                    selectedTile = cell.tileOptions[UnityEngine.Random.Range(0, cell.tileOptions.Length)];
-                }
-                else
-                {
-                    // print(cell.tileOptions[0]);
-                    selectedTile = cell.tileOptions[0];
-                }
+                cumulativeWeight = 0;
                 break;
             }
+
+            // Zresetuj kumulatywną wagę dla kolejnej komórki
+            
         }
-        Cell cellToCollapse = tempGrid[UnityEngine.Random.Range(0, tempGrid.Count)];
+
+        // Jeśli nie wybrano żadnej płytki, ustaw domyślną płytkę
+        if (selectedTile == null)
+        {
+            selectedTile = tempGrid[0].tileOptions[0]; // Ustaw pierwszą dostępną płytkę
+        }
+
+        // Zastosuj wybraną płytkę do komórki
+        Cell cellToCollapse = tempGrid[0]; // Użyj pierwszej komórki, ponieważ iterowaliśmy po nich w kolejności
         cellToCollapse.collapsed = true;
         cellToCollapse.tileOptions = new Tile[] { selectedTile };
         Tile foundTile = cellToCollapse.tileOptions[0];
+
+        // Sprawdź, czy płytka nie jest null
         if (foundTile != null)
         {
             Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
@@ -135,14 +138,9 @@ public class WaveFunction : MonoBehaviour
         else
         {
             Debug.LogWarning("FoundTile is null!");
-            Debug.LogWarning(foundTile);
-            Debug.LogWarning(cellToCollapse.tileOptions);
-            Debug.LogWarning(selectedTile);
-            Debug.LogWarning(cellToCollapse);
-            Debug.LogWarning(selectedTile.getWeight());
         }
 
-        // Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
+        // Aktualizuj generację
         UpdateGeneration();
     }
 

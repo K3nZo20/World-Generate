@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upNeighbours:
   - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
-  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
+  - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
   downNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
   leftNeighbours:
@@ -110,7 +110,7 @@ MonoBehaviour:
   - {fileID: -1201851318658415911, guid: 6da6a856432aeed45ad8ce5849ce4b87, type: 3}
   - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
   - {fileID: -8122477257862737944, guid: 0238ff1560d02b348a45923d200a0bc0, type: 3}
-  weight: 4
+  weight: 60
 --- !u!61 &-1797226799681897890
 BoxCollider2D:
   m_ObjectHideFlags: 0

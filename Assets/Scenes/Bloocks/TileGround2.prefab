@@ -112,7 +112,7 @@ MonoBehaviour:
   - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
   - {fileID: -1201851318658415911}
   - {fileID: -8122477257862737944, guid: 0238ff1560d02b348a45923d200a0bc0, type: 3}
-  weight: 7
+  weight: 100
 --- !u!61 &-8160444431729214369
 BoxCollider2D:
   m_ObjectHideFlags: 0

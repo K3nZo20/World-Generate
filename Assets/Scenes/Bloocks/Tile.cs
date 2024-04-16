@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     public Tile[] rightNeighbours;
 
     // Property to track the prevalence of the tile
-    public float weight = 1;
+    public float weight;
 
     public float getWeight()
     {
