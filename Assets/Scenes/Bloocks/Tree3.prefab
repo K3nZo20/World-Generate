@@ -107,4 +107,4 @@ MonoBehaviour:
   rightNeighbours:
   - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
   - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
-  weight: 40
+  weight: 15

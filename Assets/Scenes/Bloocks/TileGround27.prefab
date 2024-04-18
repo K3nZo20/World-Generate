@@ -99,10 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
+  - {fileID: -1201851318658415911, guid: 6da6a856432aeed45ad8ce5849ce4b87, type: 3}
   downNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
   leftNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
   rightNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
-  weight: 5
+  weight: 10

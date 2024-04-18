@@ -109,7 +109,7 @@ MonoBehaviour:
   rightNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
   - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
-  weight: 10
+  weight: 5
 --- !u!61 &6827146299483397139
 BoxCollider2D:
   m_ObjectHideFlags: 0

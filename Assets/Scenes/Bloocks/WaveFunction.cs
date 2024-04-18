@@ -12,8 +12,8 @@ public class WaveFunction : MonoBehaviour
     public Tile[] tileObjects;
     public List<Cell> gridComponents;
     public Cell cellObj;
-    private Vector3 playerPosition;
-    private Moving Position;
+    // private Vector3 playerPosition;
+    // private Moving Position;
 
     int iterations = 0;
 
@@ -21,23 +21,23 @@ public class WaveFunction : MonoBehaviour
     {
         gridComponents = new List<Cell>();
         InitializeGrid();
-        Position = FindObjectOfType<Moving>();
+        // Position = FindObjectOfType<Moving>();
 
     }
 
-    void Update()
-    {
-        playerPosition = Position.getPosition();
-    }
+    // void Update()
+    // {
+    //     playerPosition = Position.getPosition();
+    // }
 
 
     void InitializeGrid()
     {  
-        for (int y = 0; y < dimensions; y++)
+        for (int x = 0; x < dimensions; x++)
         {
-            for (int x = 0; x < dimensions; x++)
+            for (int y = 0; y < dimensions; y++)
             {
-                Cell newCell = Instantiate(cellObj, new Vector2(x, y), Quaternion.identity);
+                Cell newCell = Instantiate(cellObj, new Vector2(y, x), Quaternion.identity);
                 newCell.CreateCell(false, tileObjects);
                 gridComponents.Add(newCell);
             }
@@ -50,10 +50,22 @@ public class WaveFunction : MonoBehaviour
     IEnumerator CheckEntropy()
     {
         List<Cell> tempGrid = new List<Cell>(gridComponents);
+        List<Cell> tempGrid2 = new List<Cell>();
 
         tempGrid.RemoveAll(c => c.collapsed);
+        int b = tempGrid.Count/2 ;
+        foreach (Cell cell in tempGrid.GetRange(b,tempGrid.Count-b))
+        {
+            tempGrid2.Add(cell);
+        }
+        foreach (Cell cell in tempGrid.GetRange(0,b))
+        {
+            tempGrid2.Add(cell);
+        }
 
-        tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
+        tempGrid = tempGrid2;
+
+        // tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
 
         int arrLength = tempGrid[0].tileOptions.Length;
         int stopIndex = default;
@@ -79,27 +91,26 @@ public class WaveFunction : MonoBehaviour
 
     void CollapseCell(List<Cell> tempGrid)
     {
-        // Obliczanie sumy wag dla wszystkich dostępnych płytek
-        // float totalWeight = tempGrid.Sum(cell => cell.tileOptions.Sum(tile => tile.getWeight()));
-        // print(totalWeight);
 
-        // // Losowanie liczby z przedziału [0, totalWeight)
-        // float randomValue = UnityEngine.Random.Range(0, totalWeight);
+        // Calculate the total weight of all tiles in the tempGrid
+        float totalWeight = tempGrid.Sum(cell => cell.tileOptions.Sum(tile => tile.getWeight()));
+
+        // Generate a random value between 0 and the total weight
+        float randomValue = UnityEngine.Random.Range(0, totalWeight);
 
         int cumulativeWeight = 0;
         Tile selectedTile = null;
 
-        // Iterowanie po komórkach w kolejności
+        // Iterate through the cells in tempGrid
         foreach (Cell cell in tempGrid)
         {
-            int totalWeight = (int)(cell.tileOptions.Sum(tile => tile.getWeight()));
-            int randomValue = (int)UnityEngine.Random.Range(0, totalWeight-1);
-            // Iterowanie po dostępnych płytkach w komórce
+            // Iterate through the tiles in the current cell
             foreach (Tile tile in cell.tileOptions.OrderBy(t => Guid.NewGuid()))
             {
+                // Add the tile's weight to the cumulative weight
                 cumulativeWeight += (int)tile.getWeight();
 
-                // Jeśli kumulatywna waga przekroczy losową wartość, wybierz tę płytkę
+                // If the cumulative weight exceeds the random value, select the tile
                 if (cumulativeWeight >= randomValue)
                 {
                     selectedTile = tile;
@@ -107,46 +118,27 @@ public class WaveFunction : MonoBehaviour
                 }
             }
 
-            // Jeśli płytka została wybrana, przerwij iterację
-            if (selectedTile != null)
+            // If a tile has been selected, break the loop
+            if (selectedTile!= null)
             {
-                cumulativeWeight = 0;
                 break;
             }
-
-            // Zresetuj kumulatywną wagę dla kolejnej komórki
-            
         }
 
-        // Jeśli nie wybrano żadnej płytki, ustaw domyślną płytkę
-        if (selectedTile == null)
-        {
-            selectedTile = tempGrid[0].tileOptions[0]; // Ustaw pierwszą dostępną płytkę
-        }
-
-        // Zastosuj wybraną płytkę do komórki
-        Cell cellToCollapse = tempGrid[0]; // Użyj pierwszej komórki, ponieważ iterowaliśmy po nich w kolejności
+        // Collapse the cell with the selected tile
+        Cell cellToCollapse = tempGrid.FirstOrDefault(cell => cell.tileOptions.Contains(selectedTile));
         cellToCollapse.collapsed = true;
         cellToCollapse.tileOptions = new Tile[] { selectedTile };
         Tile foundTile = cellToCollapse.tileOptions[0];
+        Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
 
-        // Sprawdź, czy płytka nie jest null
-        if (foundTile != null)
-        {
-            Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogWarning("FoundTile is null!");
-        }
-
-        // Aktualizuj generację
         UpdateGeneration();
-    }
+    }   
 
     void UpdateGeneration()
     {
         List<Cell> newGenerationCell = new List<Cell>(gridComponents);
+
 
         for (int y = 0; y < dimensions; y++)
         {
@@ -155,7 +147,6 @@ public class WaveFunction : MonoBehaviour
                 var index = x + y * dimensions;
                 if (gridComponents[index].collapsed)
                 {
-                    // Debug.Log("called");
                     newGenerationCell[index] = gridComponents[index];
                 }
                 else

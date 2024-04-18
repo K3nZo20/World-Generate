@@ -104,15 +104,16 @@ MonoBehaviour:
   - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
   downNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
+  - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
   leftNeighbours:
   - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
-  - {fileID: -1201851318658415911}
   - {fileID: 8745305224442992147, guid: 9e344de0a8483304c9e800d2e9543429, type: 3}
+  - {fileID: -1201851318658415911}
   rightNeighbours:
   - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
-  - {fileID: -1201851318658415911}
   - {fileID: -8122477257862737944, guid: 0238ff1560d02b348a45923d200a0bc0, type: 3}
-  weight: 100
+  - {fileID: -1201851318658415911}
+  weight: 20
 --- !u!61 &-8160444431729214369
 BoxCollider2D:
   m_ObjectHideFlags: 0

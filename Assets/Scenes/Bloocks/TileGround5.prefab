@@ -117,7 +117,7 @@ MonoBehaviour:
   - {fileID: 8745305224442992147, guid: 9e344de0a8483304c9e800d2e9543429, type: 3}
   - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
   - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
-  weight: 20
+  weight: 10
 --- !u!61 &-3668452666325130676
 BoxCollider2D:
   m_ObjectHideFlags: 0
