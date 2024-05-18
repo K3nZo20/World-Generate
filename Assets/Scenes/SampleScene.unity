@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 220251171}
-  - component: {fileID: 220251170}
+  - component: {fileID: 220251172}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -140,34 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &220251170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220251169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c472b1a0d7637c347b840f2b429074d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimensions: 70
-  tileObjects:
-  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
-  - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
-  - {fileID: 8745305224442992147, guid: 9e344de0a8483304c9e800d2e9543429, type: 3}
-  - {fileID: -8122477257862737944, guid: 0238ff1560d02b348a45923d200a0bc0, type: 3}
-  - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
-  - {fileID: -12438271228966205, guid: 627f49555da154f41b2d247781c066d4, type: 3}
-  - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
-  - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
-  - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
-  - {fileID: -1201851318658415911, guid: 6da6a856432aeed45ad8ce5849ce4b87, type: 3}
-  - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
-  - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
-  gridComponents: []
-  cellObj: {fileID: 3623895361131620312, guid: 18cf9cd58dfd1784bb60d61234884372, type: 3}
 --- !u!4 &220251171
 Transform:
   m_ObjectHideFlags: 0
@@ -183,6 +155,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &220251172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220251169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e490ba7964c766d42bb91b6618589371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5
+  cellPrefab: {fileID: 3969071207447705800, guid: 18cf9cd58dfd1784bb60d61234884372, type: 3}
+  player: {fileID: 2045156711}
+  tileOptionsList:
+  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
+  - {fileID: -1201851318658415911, guid: 6da6a856432aeed45ad8ce5849ce4b87, type: 3}
+  - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
+  - {fileID: -12438271228966205, guid: 627f49555da154f41b2d247781c066d4, type: 3}
+  - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
+  - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
+  - {fileID: 8745305224442992147, guid: 9e344de0a8483304c9e800d2e9543429, type: 3}
+  - {fileID: -8122477257862737944, guid: 0238ff1560d02b348a45923d200a0bc0, type: 3}
+  - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
+  - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
+  - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
+  - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
 --- !u!1 &401937629
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045156711}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.1
@@ -478,7 +478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045156711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1, y: 33.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
