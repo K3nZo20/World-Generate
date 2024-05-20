@@ -11,10 +11,6 @@ public class Tile : MonoBehaviour
 
     // Property to track the prevalence of the tile
     public float weight;
-
-    // List of available block options for this tile
-    public GameObject[] blockOptions;
-
     public float getWeight()
     {
         return weight;

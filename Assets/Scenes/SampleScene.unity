@@ -167,12 +167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e490ba7964c766d42bb91b6618589371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
+  radius: 80
   cellPrefab: {fileID: 3969071207447705800, guid: 18cf9cd58dfd1784bb60d61234884372, type: 3}
   player: {fileID: 2045156711}
   tileOptionsList:
-  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
   - {fileID: -1201851318658415911, guid: 6da6a856432aeed45ad8ce5849ce4b87, type: 3}
+  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
   - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
   - {fileID: -12438271228966205, guid: 627f49555da154f41b2d247781c066d4, type: 3}
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
@@ -183,6 +183,13 @@ MonoBehaviour:
   - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
   - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
   - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
+  - {fileID: 5602090032313672757, guid: 59b35ac7e751ce141a92885357000482, type: 3}
+  - {fileID: 1904956195508044191, guid: a723bdd296242c54f8ffa14758609c41, type: 3}
+  - {fileID: -7973302874518933715, guid: 6e5c4a6dd74ce524baea10ee7a46842d, type: 3}
+  - {fileID: 8627185929853138494, guid: 8539f44921c14db4581fe19c2c63e30b, type: 3}
+  - {fileID: -5770499836499679535, guid: d2039109207a966469fa225ea9725dcd, type: 3}
+  - {fileID: -3555234086229204594, guid: a3ce954e916b77a49a509207864cd01d, type: 3}
+  generationDelay: 0
 --- !u!1 &401937629
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,8 +486,8 @@ Transform:
   m_GameObject: {fileID: 2045156711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
