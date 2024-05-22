@@ -16,6 +16,8 @@ public class WaveFunction2 : MonoBehaviour
     private Vector3Int previousPlayerPosition;
     private Coroutine generationCoroutine;
     private HashSet<Vector3Int> processedCells = new HashSet<Vector3Int>();
+    int iterations = 0;
+    private List<Vector3Int> positionsToProcess;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class WaveFunction2 : MonoBehaviour
         previousPlayerPosition = Vector3Int.RoundToInt(player.transform.position);
         StartCoroutine(ContinuousFillCells());
         moving = player.GetComponent<Moving>();
+        
     }
 
     void Update()
@@ -40,6 +43,7 @@ public class WaveFunction2 : MonoBehaviour
         Vector3Int playerPosition = Vector3Int.RoundToInt(player.transform.position);
         GenerateSkeletonCells(playerPosition);
         SetInitialBlock(playerPosition);
+        positionsToProcess = new List<Vector3Int>(cells.Keys);
     }
 
     void GenerateSkeletonCells(Vector3Int playerPosition)
@@ -48,7 +52,7 @@ public class WaveFunction2 : MonoBehaviour
 
         for (int x = -minradius; x <= minradius; x++)
         {
-            for (int y = -minradius/2; y <= minradius/2; y++)
+            for (int y = -minradius / 2; y <= minradius / 2; y++)
             {
                 Vector3Int cellPosition = playerPosition + new Vector3Int(x, y, 0);
                 if (!existingCellPositions.Contains(cellPosition))
@@ -72,6 +76,7 @@ public class WaveFunction2 : MonoBehaviour
             Instantiate(initialTile.gameObject, initialCell.transform.position, Quaternion.identity);
             initialCellComponent.collapsed = true;
             processedCells.Add(position);
+            
         }
     }
 
@@ -86,7 +91,6 @@ public class WaveFunction2 : MonoBehaviour
 
     IEnumerator FillCells()
     {
-        List<Vector3Int> positionsToProcess = new List<Vector3Int>(cells.Keys);
         positionsToProcess.Sort((a, b) => Vector3Int.Distance(a, previousPlayerPosition).CompareTo(Vector3Int.Distance(b, previousPlayerPosition)));
 
         Dictionary<Vector3Int, Tile> selectedTiles = new Dictionary<Vector3Int, Tile>();
@@ -116,14 +120,23 @@ public class WaveFunction2 : MonoBehaviour
 
             if (validTiles.Count == 0)
             {
-                Debug.LogWarning($"No valid tiles found for position {position}. Regenerating options.");
+                // Debug.LogWarning($"No valid tiles found for position {position}. Regenerating options.");
                 cellComponent.tileOptions = new List<Tile>(tileOptionsList);
-                // yield return new WaitForSeconds(generationDelay);
+                // print(iterations);
+                // print(positionsToProcess.Count);
+                if (iterations >= 5 & minradius >= radius)
+                {
+                    if (positionsToProcess.Count >= 500)
+                    positionsToProcess = positionsToProcess.GetRange(0, positionsToProcess.Count-500);
+                    iterations = 0;
+                }
+                iterations++;
                 yield break; // Restart the coroutine
             }
 
             Tile selectedTile = SelectTileBasedOnWeight(validTiles);
             selectedTiles[position] = selectedTile;
+            
         }
 
         foreach (KeyValuePair<Vector3Int, Tile> entry in selectedTiles)
@@ -146,12 +159,12 @@ public class WaveFunction2 : MonoBehaviour
             minradius++;
             Vector3Int playerPosition = Vector3Int.RoundToInt(player.transform.position);
             GenerateSkeletonCells(playerPosition);
-            print(minradius);
             if (minradius == radius)
             {
                 moving.MoveUp();
             }
         }
+        positionsToProcess = new List<Vector3Int>(cells.Keys);
     }
 
     bool IsTileCompatibleWithNeighbors(Vector3Int position, Tile tile, Dictionary<Vector3Int, Tile> selectedTiles)
@@ -237,4 +250,3 @@ public class WaveFunction2 : MonoBehaviour
         return tiles[tiles.Count - 1]; // Return the last tile as a fallback
     }
 }
-
