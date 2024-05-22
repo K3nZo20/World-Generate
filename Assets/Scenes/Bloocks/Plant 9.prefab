@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5481046217452696646
+--- !u!1 &3131877858895381777
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6269184217765916326}
-  - component: {fileID: 5983024218444697841}
-  - component: {fileID: 6160477125153558549}
+  - component: {fileID: 7811839279862979490}
+  - component: {fileID: 4077737904513492298}
+  - component: {fileID: 1904956195508044191}
   m_Layer: 0
-  m_Name: Transparent
+  m_Name: Plant 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6269184217765916326
+--- !u!4 &7811839279862979490
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481046217452696646}
+  m_GameObject: {fileID: 3131877858895381777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.206715, y: -9.36871, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5983024218444697841
+--- !u!212 &4077737904513492298
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481046217452696646}
+  m_GameObject: {fileID: 3131877858895381777}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,10 +71,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1282967382, guid: 5fe5454ec8605de43809133b020d1b69, type: 3}
+  m_SortingLayerID: 1533959115
+  m_SortingLayer: 2
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -1603182679, guid: 5fe5454ec8605de43809133b020d1b69, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,37 +85,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6160477125153558549
+--- !u!114 &1904956195508044191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481046217452696646}
+  m_GameObject: {fileID: 3131877858895381777}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7dd055d948cd9849a1b009f331fc65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   upNeighbours:
-  - {fileID: 6160477125153558549}
+  - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
   downNeighbours:
-  - {fileID: 6160477125153558549}
-  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
   - {fileID: -1201851318658415911, guid: 6da6a856432aeed45ad8ce5849ce4b87, type: 3}
-  - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
-  - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
-  - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
   leftNeighbours:
-  - {fileID: 6160477125153558549}
-  - {fileID: -5909718273766286127, guid: d5555e3c7d462274ca2912ec525e646b, type: 3}
+  - {fileID: 1904956195508044191}
+  - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
   - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
-  - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
-  - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
+  - {fileID: 1904956195508044191}
   rightNeighbours:
-  - {fileID: 6160477125153558549}
-  - {fileID: 6130251354271606110, guid: 2055e6c71f12034489ae9869ebf95b43, type: 3}
+  - {fileID: 1904956195508044191}
+  - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
   - {fileID: -12438271228966205, guid: 627f49555da154f41b2d247781c066d4, type: 3}
-  - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
-  - {fileID: 5495485658643352482, guid: 77b1235df12fbca4085e8e8aa81581e6, type: 3}
-  weight: 20
+  - {fileID: 1904956195508044191}
+  weight: 15

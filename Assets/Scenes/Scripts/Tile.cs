@@ -11,7 +11,6 @@ public class Tile : MonoBehaviour
 
     // Property to track the prevalence of the tile
     public float weight;
-
     public float getWeight()
     {
         return weight;

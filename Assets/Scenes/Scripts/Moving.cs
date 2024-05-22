@@ -24,9 +24,10 @@ public class Moving : MonoBehaviour
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
         }
     }
-
-    public Vector3 getPosition()
+        public void MoveUp()
     {
-        return transform.position;
+        // yield return new WaitForSeconds(time); // Poczekaj przez określony czas
+        myRigidbody.transform.position = new Vector2(myRigidbody.transform.position.x, myRigidbody.transform.position.y + 4f); // Przesuń gracza o 10 jednostek w górę
+        myRigidbody.simulated = true;
     }
 }
