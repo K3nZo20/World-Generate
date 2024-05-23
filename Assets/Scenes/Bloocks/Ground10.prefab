@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 313291013467630703}
   - component: {fileID: 8745305224442992147}
   - component: {fileID: -1797226799681897890}
-  m_Layer: 0
+  - component: {fileID: 239226837501449197}
+  m_Layer: 6
   m_Name: Ground10
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,3 +138,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &239226837501449197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896267335170215831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7649085575c098842a48256ab15372b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block2Prefab: {fileID: 320053698896859722, guid: a87e20b7328a6394688b4ce6632f7505, type: 3}
+  block3Prefab: {fileID: 0}
+  maxDistance: 3

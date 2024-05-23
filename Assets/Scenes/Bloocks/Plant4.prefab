@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2747739115002297544}
   - component: {fileID: 4102044683993759047}
   - component: {fileID: 8627185929853138494}
+  - component: {fileID: 5761419309910735389}
   m_Layer: 0
   m_Name: Plant4
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,3 +115,29 @@ MonoBehaviour:
   - {fileID: -12438271228966205, guid: 627f49555da154f41b2d247781c066d4, type: 3}
   - {fileID: 1904956195508044191, guid: a723bdd296242c54f8ffa14758609c41, type: 3}
   weight: 15
+--- !u!61 &5761419309910735389
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766734206443262998}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
+  m_EdgeRadius: 0

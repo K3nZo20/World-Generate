@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 878157260795522647}
   - component: {fileID: -12438271228966205}
   - component: {fileID: 6827146299483397139}
-  m_Layer: 0
+  - component: {fileID: -418602031676107625}
+  m_Layer: 6
   m_Name: Ground4
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +107,6 @@ MonoBehaviour:
   - {fileID: -12438271228966205}
   leftNeighbours:
   - {fileID: 6160477125153558549, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
-  - {fileID: 3209264743184958988, guid: d53d6ec2c9ab9b244bda8f8bf8eaac5e, type: 3}
   rightNeighbours:
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
   - {fileID: 7498739334650643987, guid: 8f3f9aab0f8ce4e4da121664ec5a2dea, type: 3}
@@ -137,3 +137,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-418602031676107625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082569761830259726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7649085575c098842a48256ab15372b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block2Prefab: {fileID: 320053698896859722, guid: a87e20b7328a6394688b4ce6632f7505, type: 3}
+  block3Prefab: {fileID: 0}
+  maxDistance: 3

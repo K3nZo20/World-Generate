@@ -61,6 +61,19 @@ public class WaveFunction2 : MonoBehaviour
                     Cell cellComponent = cell.GetComponent<Cell>();
                     cellComponent.CreateCell(false, new List<Tile>(tileOptionsList));
                     cells[cellPosition] = cell;
+
+                }  
+                if (cellPosition.y == -30)
+                {
+                    foreach (Tile tile in tileOptionsList)
+                    {
+                        if (tile.CompareTag("Stone"))
+                        {
+                            tile.weight = 100;
+                            print(tile.weight);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -122,12 +135,10 @@ public class WaveFunction2 : MonoBehaviour
             {
                 // Debug.LogWarning($"No valid tiles found for position {position}. Regenerating options.");
                 cellComponent.tileOptions = new List<Tile>(tileOptionsList);
-                // print(iterations);
-                // print(positionsToProcess.Count);
-                if (iterations >= 5 & minradius >= radius)
+                if (iterations >= 10 & minradius >= radius)
                 {
-                    if (positionsToProcess.Count >= 500)
-                    positionsToProcess = positionsToProcess.GetRange(0, positionsToProcess.Count-500);
+                    if (positionsToProcess.Count > 1)
+                    positionsToProcess = positionsToProcess.GetRange(0, positionsToProcess.Count /2);
                     iterations = 0;
                 }
                 iterations++;
@@ -151,7 +162,6 @@ public class WaveFunction2 : MonoBehaviour
                 cellComponent.tileOptions = new List<Tile> { selectedTile };
                 cellComponent.collapsed = true;
                 processedCells.Add(position);
-                // yield return new WaitForSeconds(generationDelay);
             }
         }
         if (minradius < radius)
