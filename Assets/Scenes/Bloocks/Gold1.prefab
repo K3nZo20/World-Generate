@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2234956306510805362}
   - component: {fileID: 6834791433878819761}
   - component: {fileID: 8501160938388306072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gold1
-  m_TagString: Untagged
+  m_TagString: Gold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block2Prefab: {fileID: 817654280831810823, guid: e2c97f7f843962241b9e463a3c0c89cc, type: 3}
   block3Prefab: {fileID: 5481046217452696646, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
-  maxDistance: 3
+  maxDistance: 2
+  requiredCoal: 10
+  requiredGold: 0
+  requiredDiamond: 0
 --- !u!114 &6834791433878819761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +129,7 @@ MonoBehaviour:
   rightNeighbours:
   - {fileID: 6022196105356537257, guid: a79e32266a7697b4f8a94f08eea4d9b8, type: 3}
   - {fileID: -775931654306278613, guid: 13f266d389890be418694ac0123520a2, type: 3}
-  weight: 0.5
+  weight: 0
 --- !u!61 &8501160938388306072
 BoxCollider2D:
   m_ObjectHideFlags: 0

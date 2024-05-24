@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7667918155417157020}
   - component: {fileID: 3013090017118649936}
   - component: {fileID: -217758756720044131}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coal2
-  m_TagString: Untagged
+  m_TagString: Coal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block2Prefab: {fileID: 817654280831810823, guid: e2c97f7f843962241b9e463a3c0c89cc, type: 3}
   block3Prefab: {fileID: 5481046217452696646, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
-  maxDistance: 3
+  maxDistance: 2
 --- !u!114 &-217758756720044131
 MonoBehaviour:
   m_ObjectHideFlags: 0

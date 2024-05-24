@@ -7,6 +7,9 @@ TagManager:
   - Plant
   - Ground
   - Stone
+  - Gold
+  - Diamond
+  - Coal
   layers:
   - Default
   - TransparentFX

@@ -18,14 +18,19 @@ public class WaveFunction2 : MonoBehaviour
     private HashSet<Vector3Int> processedCells = new HashSet<Vector3Int>();
     int iterations = 0;
     private List<Vector3Int> positionsToProcess;
+    int stone;
+    int gold;
+    int diamond;
 
     void Start()
     {
+        stone = Random.Range(-30, -50);
+        gold = Random.Range(-50, -60);
+        diamond = Random.Range(-60, -80);
         GenerateInitialCells();
         previousPlayerPosition = Vector3Int.RoundToInt(player.transform.position);
         StartCoroutine(ContinuousFillCells());
         moving = player.GetComponent<Moving>();
-        
     }
 
     void Update()
@@ -50,6 +55,7 @@ public class WaveFunction2 : MonoBehaviour
     {
         HashSet<Vector3Int> existingCellPositions = new HashSet<Vector3Int>(cells.Keys);
 
+
         for (int x = -minradius; x <= minradius; x++)
         {
             for (int y = -minradius / 2; y <= minradius / 2; y++)
@@ -63,14 +69,35 @@ public class WaveFunction2 : MonoBehaviour
                     cells[cellPosition] = cell;
 
                 }  
-                if (cellPosition.y == -30)
+                if (cellPosition.y == stone)
                 {
                     foreach (Tile tile in tileOptionsList)
                     {
                         if (tile.CompareTag("Stone"))
                         {
                             tile.weight = 100;
-                            print(tile.weight);
+                            break;
+                        }
+                    }
+                }
+                if (cellPosition.y == gold)
+                {
+                    foreach (Tile tile in tileOptionsList)
+                    {
+                        if (tile.CompareTag("Gold"))
+                        {
+                            tile.weight = 0.5f;
+                            break;
+                        }
+                    }
+                }
+                if (cellPosition.y == diamond)
+                {
+                    foreach (Tile tile in tileOptionsList)
+                    {
+                        if (tile.CompareTag("Diamond"))
+                        {
+                            tile.weight = 0.1f;
                             break;
                         }
                     }

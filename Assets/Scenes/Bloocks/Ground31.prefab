@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4851665832036070789}
   - component: {fileID: 8895628692046300592}
   - component: {fileID: 5602090032313672757}
+  - component: {fileID: -8133266816118359263}
   m_Layer: 6
   m_Name: Ground31
   m_TagString: Ground
@@ -134,9 +135,25 @@ MonoBehaviour:
   leftNeighbours:
   - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
-  - {fileID: 6022196105356537257, guid: a79e32266a7697b4f8a94f08eea4d9b8, type: 3}
   rightNeighbours:
   - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
   - {fileID: -1712805446982311503, guid: 41fa4e62e1d902146a3dad055904c973, type: 3}
-  - {fileID: 6022196105356537257, guid: a79e32266a7697b4f8a94f08eea4d9b8, type: 3}
   weight: 1
+--- !u!114 &-8133266816118359263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959994268317311440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7649085575c098842a48256ab15372b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block2Prefab: {fileID: 320053698896859722, guid: a87e20b7328a6394688b4ce6632f7505, type: 3}
+  block3Prefab: {fileID: 5481046217452696646, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
+  maxDistance: 2
+  requiredCoal: 5
+  requiredGold: 0
+  requiredDiamond: 0

@@ -1,22 +1,20 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BlockChanger : MonoBehaviour
 {
-    // Prefab of the second and third blocks to instantiate
     public GameObject block2Prefab;
     public GameObject block3Prefab;
-    // Reference to the player object
     private Transform playerTransform;
-    // Maximum allowed distance to change blocks
     public float maxDistance = 3f;
-    public Text BlocksCountText;
-    private int blocks = 0;
-    
+    private BlockCounter blockCounter;
+
+    // Nowe pola określające wymagania
+    public int requiredCoal = 0;
+    public int requiredGold = 0;
+    public int requiredDiamond = 0;
 
     void Start()
     {
-        // Automatically find the player object by tag
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -24,69 +22,107 @@ public class BlockChanger : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Player object not found. Make sure the player has the tag 'Player'.");
+            Debug.LogError("Nie znaleziono obiektu gracza. Upewnij się, że gracz ma tag 'Player'.");
+        }
+
+        blockCounter = FindObjectOfType<BlockCounter>();
+        if (blockCounter == null)
+        {
+            Debug.LogError("Nie znaleziono BlockCounter w scenie.");
         }
     }
 
     void Update()
     {
-        // Detect mouse click
         if (Input.GetMouseButtonDown(0))
         {
-            // Convert mouse position to world position
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            // Check if the mouse position overlaps with this block's collider
             Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
 
             if (hitCollider != null && hitCollider.transform == transform)
             {
-                // Check if the block is within the allowed distance from the player
                 if (playerTransform != null && Vector2.Distance(playerTransform.position, transform.position) <= maxDistance)
                 {
-                    ChangeBlock();
+                    if (CanChangeBlock())
+                    {
+                        ChangeBlock();
+                        AddBlocks(hitCollider.gameObject);
+                    }
+                    else
+                    {
+                        Debug.Log("Nie spełniasz wymagań, aby zmienić ten blok.");
+                    }
                 }
                 else
                 {
-                    Debug.Log("Block is too far from the player to change or playerTransform is not set.");
+                    Debug.Log("Blok jest za daleko od gracza, aby go zmienić lub playerTransform nie jest ustawiony.");
                 }
             }
         }
     }
 
+    bool CanChangeBlock()
+    {
+        bool canChange = true;
+
+        if (blockCounter.GetGoldCount() < requiredGold)
+        {
+            blockCounter.FlashElement("Gold");
+            canChange = false;
+        }
+
+        if (blockCounter.GetCoalCount() < requiredCoal)
+        {
+            blockCounter.FlashElement("Coal");
+            canChange = false;
+        }
+
+        return canChange;
+    }
+
     void ChangeBlock()
     {
-        // Check for any block with tag "Plant" above the current block
-        Vector2 abovePosition = new Vector2(transform.position.x, transform.position.y + 1); // Adjust the offset as needed
+        Vector2 abovePosition = new Vector2(transform.position.x, transform.position.y + 1);
         Collider2D[] colliders = Physics2D.OverlapPointAll(abovePosition);
 
         bool foundPlant = false;
         foreach (Collider2D collider in colliders)
         {
-            // Check if the collider's tag is "Plant"
             if (collider.CompareTag("Plant"))
             {
-                // Instantiate block3Prefab at the same position as the plant block
                 Instantiate(block3Prefab, collider.transform.position, collider.transform.rotation);
-                // Destroy the plant block
                 Destroy(collider.gameObject);
                 foundPlant = true;
-                break; // If a plant block is found, no need to continue searching
+                break;
             }
         }
 
-        // Only instantiate block2Prefab if no plant block was found above
         if (!foundPlant)
         {
             Instantiate(block2Prefab, transform.position, transform.rotation);
-            // Destroy the current block
             Destroy(gameObject);
         }
     }
 
-        public void AddBlocks()
+    void AddBlocks(GameObject block)
     {
-        blocks++;
-        BlocksCountText.text = blocks.ToString();
+        if (blockCounter == null)
+        {
+            Debug.LogError("BlockCounter nie jest ustawiony.");
+            return;
+        }
+
+        if (block.CompareTag("Gold"))
+        {
+            blockCounter.AddGold();
+        }
+        else if (block.CompareTag("Diamond"))
+        {
+            blockCounter.AddDiamond();
+        }
+        else if (block.CompareTag("Coal"))
+        {
+            blockCounter.AddCoal();
+        }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2800986652684317038}
   - component: {fileID: 6022196105356537257}
   - component: {fileID: 7038862161175555125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone
   m_TagString: Stone
   m_Icon: {fileID: 0}
@@ -101,7 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block2Prefab: {fileID: 817654280831810823, guid: e2c97f7f843962241b9e463a3c0c89cc, type: 3}
   block3Prefab: {fileID: 5481046217452696646, guid: 17dd7a6f1c452704fa13098f1b68dbc3, type: 3}
-  maxDistance: 3
+  maxDistance: 2
+  requiredCoal: 0
+  requiredGold: 0
+  requiredDiamond: 0
 --- !u!114 &6022196105356537257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,15 +133,11 @@ MonoBehaviour:
   - {fileID: -4933350339512173928, guid: 78edc19ff04051c498ccb8880bcc4a4e, type: 3}
   leftNeighbours:
   - {fileID: 6022196105356537257}
-  - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
-  - {fileID: 5602090032313672757, guid: 59b35ac7e751ce141a92885357000482, type: 3}
   - {fileID: 6834791433878819761, guid: 4602324250bef7048b7f6d26728e240d, type: 3}
   - {fileID: -3577310523392942911, guid: 27bcfeb8377a2b94291971038d1462e4, type: 3}
   - {fileID: -4933350339512173928, guid: 78edc19ff04051c498ccb8880bcc4a4e, type: 3}
   rightNeighbours:
   - {fileID: 6022196105356537257}
-  - {fileID: 406730927170697270, guid: f896a23842f5c9e4987cef9064370565, type: 3}
-  - {fileID: 5602090032313672757, guid: 59b35ac7e751ce141a92885357000482, type: 3}
   - {fileID: 6834791433878819761, guid: 4602324250bef7048b7f6d26728e240d, type: 3}
   - {fileID: -3577310523392942911, guid: 27bcfeb8377a2b94291971038d1462e4, type: 3}
   - {fileID: -4933350339512173928, guid: 78edc19ff04051c498ccb8880bcc4a4e, type: 3}
