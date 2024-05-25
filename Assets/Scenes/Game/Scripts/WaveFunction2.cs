@@ -16,11 +16,11 @@ public class WaveFunction2 : MonoBehaviour
     private Vector3Int previousPlayerPosition;
     private Coroutine generationCoroutine;
     private HashSet<Vector3Int> processedCells = new HashSet<Vector3Int>();
-    int iterations = 0;
     private List<Vector3Int> positionsToProcess;
-    int stone;
-    int gold;
-    int diamond;
+    private int iterations = 0;
+    private int stone;
+    private int gold;
+    private int diamond;
 
     void Start()
     {
@@ -55,7 +55,6 @@ public class WaveFunction2 : MonoBehaviour
     {
         HashSet<Vector3Int> existingCellPositions = new HashSet<Vector3Int>(cells.Keys);
 
-
         for (int x = -minradius; x <= minradius; x++)
         {
             for (int y = -minradius / 2; y <= minradius / 2; y++)
@@ -68,40 +67,31 @@ public class WaveFunction2 : MonoBehaviour
                     cellComponent.CreateCell(false, new List<Tile>(tileOptionsList));
                     cells[cellPosition] = cell;
 
-                }  
-                if (cellPosition.y == stone)
-                {
-                    foreach (Tile tile in tileOptionsList)
+                    if (cellPosition.y == stone)
                     {
-                        if (tile.CompareTag("Stone"))
-                        {
-                            tile.weight = 100;
-                            break;
-                        }
+                        SetTileWeight("Stone", 100);
+                    }
+                    if (cellPosition.y == gold)
+                    {
+                        SetTileWeight("Gold", 0.5f);
+                    }
+                    if (cellPosition.y == diamond)
+                    {
+                        SetTileWeight("Diamond", 0.1f);
                     }
                 }
-                if (cellPosition.y == gold)
-                {
-                    foreach (Tile tile in tileOptionsList)
-                    {
-                        if (tile.CompareTag("Gold"))
-                        {
-                            tile.weight = 0.5f;
-                            break;
-                        }
-                    }
-                }
-                if (cellPosition.y == diamond)
-                {
-                    foreach (Tile tile in tileOptionsList)
-                    {
-                        if (tile.CompareTag("Diamond"))
-                        {
-                            tile.weight = 0.1f;
-                            break;
-                        }
-                    }
-                }
+            }
+        }
+    }
+
+    void SetTileWeight(string tag, float weight)
+    {
+        foreach (Tile tile in tileOptionsList)
+        {
+            if (tile.CompareTag(tag))
+            {
+                tile.weight = weight;
+                break;
             }
         }
     }
@@ -116,7 +106,6 @@ public class WaveFunction2 : MonoBehaviour
             Instantiate(initialTile.gameObject, initialCell.transform.position, Quaternion.identity);
             initialCellComponent.collapsed = true;
             processedCells.Add(position);
-            
         }
     }
 
@@ -124,13 +113,16 @@ public class WaveFunction2 : MonoBehaviour
     {
         while (true)
         {
-            yield return StartCoroutine(FillCells());
+            yield return FillCellsBatch();
             yield return null; // Wait for the end of frame before checking for new cells
         }
     }
 
-    IEnumerator FillCells()
+    IEnumerator FillCellsBatch()
     {
+        int batchSize = 10; // Number of cells to process per batch
+        int processedCount = 0;
+
         positionsToProcess.Sort((a, b) => Vector3Int.Distance(a, previousPlayerPosition).CompareTo(Vector3Int.Distance(b, previousPlayerPosition)));
 
         Dictionary<Vector3Int, Tile> selectedTiles = new Dictionary<Vector3Int, Tile>();
@@ -162,10 +154,10 @@ public class WaveFunction2 : MonoBehaviour
             {
                 // Debug.LogWarning($"No valid tiles found for position {position}. Regenerating options.");
                 cellComponent.tileOptions = new List<Tile>(tileOptionsList);
-                if (iterations >= 10 & minradius >= radius)
+                if (iterations >= 10 && minradius >= radius)
                 {
                     if (positionsToProcess.Count > 1)
-                    positionsToProcess = positionsToProcess.GetRange(0, positionsToProcess.Count /2);
+                        positionsToProcess = positionsToProcess.GetRange(0, positionsToProcess.Count / 2);
                     iterations = 0;
                 }
                 iterations++;
@@ -174,7 +166,13 @@ public class WaveFunction2 : MonoBehaviour
 
             Tile selectedTile = SelectTileBasedOnWeight(validTiles);
             selectedTiles[position] = selectedTile;
-            
+
+            processedCount++;
+            if (processedCount >= batchSize)
+            {
+                processedCount = 0;
+                yield return new WaitForSeconds(generationDelay); // Delay between batches
+            }
         }
 
         foreach (KeyValuePair<Vector3Int, Tile> entry in selectedTiles)
@@ -191,6 +189,7 @@ public class WaveFunction2 : MonoBehaviour
                 processedCells.Add(position);
             }
         }
+
         if (minradius < radius)
         {
             minradius++;
@@ -218,22 +217,7 @@ public class WaveFunction2 : MonoBehaviour
             Vector3Int neighborPosition = position + direction;
             if (selectedTiles.TryGetValue(neighborPosition, out Tile neighborTile))
             {
-                if (direction == Vector3Int.up && !System.Array.Exists(neighborTile.downNeighbours, t => t == tile))
-                {
-                    return false;
-                }
-                if (direction == Vector3Int.down && !System.Array.Exists(neighborTile.upNeighbours, t => t == tile))
-                {
-                    return false;
-                }
-                if (direction == Vector3Int.left && !System.Array.Exists(neighborTile.rightNeighbours, t => t == tile))
-                {
-                    return false;
-                }
-                if (direction == Vector3Int.right && !System.Array.Exists(neighborTile.leftNeighbours, t => t == tile))
-                {
-                    return false;
-                }
+                if (!IsCompatible(tile, neighborTile, direction)) return false;
             }
             else if (cells.TryGetValue(neighborPosition, out GameObject neighborCell))
             {
@@ -241,26 +225,24 @@ public class WaveFunction2 : MonoBehaviour
                 if (neighborCellComponent.collapsed)
                 {
                     Tile collapsedTile = neighborCellComponent.tileOptions[0];
-                    if (direction == Vector3Int.up && !System.Array.Exists(collapsedTile.downNeighbours, t => t == tile))
-                    {
-                        return false;
-                    }
-                    if (direction == Vector3Int.down && !System.Array.Exists(collapsedTile.upNeighbours, t => t == tile))
-                    {
-                        return false;
-                    }
-                    if (direction == Vector3Int.left && !System.Array.Exists(collapsedTile.rightNeighbours, t => t == tile))
-                    {
-                        return false;
-                    }
-                    if (direction == Vector3Int.right && !System.Array.Exists(collapsedTile.leftNeighbours, t => t == tile))
-                    {
-                        return false;
-                    }
+                    if (!IsCompatible(tile, collapsedTile, direction)) return false;
                 }
             }
         }
 
+        return true;
+    }
+
+    bool IsCompatible(Tile tile, Tile neighborTile, Vector3Int direction)
+    {
+        if (direction == Vector3Int.up && !System.Array.Exists(neighborTile.downNeighbours, t => t == tile))
+            return false;
+        if (direction == Vector3Int.down && !System.Array.Exists(neighborTile.upNeighbours, t => t == tile))
+            return false;
+        if (direction == Vector3Int.left && !System.Array.Exists(neighborTile.rightNeighbours, t => t == tile))
+            return false;
+        if (direction == Vector3Int.right && !System.Array.Exists(neighborTile.leftNeighbours, t => t == tile))
+            return false;
         return true;
     }
 
