@@ -20,16 +20,12 @@ public class BlockChanger : MonoBehaviour
         {
             playerTransform = player.transform;
         }
-        else
-        {
-            Debug.LogError("Nie znaleziono obiektu gracza. Upewnij się, że gracz ma tag 'Player'.");
-        }
+        // else
+        // {
+        //     Debug.LogError("Nie znaleziono obiektu gracza. Upewnij się, że gracz ma tag 'Player'.");
+        // }
 
         blockCounter = FindObjectOfType<BlockCounter>();
-        if (blockCounter == null)
-        {
-            Debug.LogError("Nie znaleziono BlockCounter w scenie.");
-        }
     }
 
     void Update()
@@ -48,15 +44,15 @@ public class BlockChanger : MonoBehaviour
                         ChangeBlock();
                         AddBlocks(hitCollider.gameObject);
                     }
-                    else
-                    {
-                        Debug.Log("Nie spełniasz wymagań, aby zmienić ten blok.");
-                    }
+                    // else
+                    // {
+                    //     Debug.Log("Nie spełniasz wymagań, aby zmienić ten blok.");
+                    // }
                 }
-                else
-                {
-                    Debug.Log("Blok jest za daleko od gracza, aby go zmienić lub playerTransform nie jest ustawiony.");
-                }
+                // else
+                // {
+                //     Debug.Log("Blok jest za daleko od gracza, aby go zmienić lub playerTransform nie jest ustawiony.");
+                // }
             }
         }
     }
@@ -108,7 +104,7 @@ public class BlockChanger : MonoBehaviour
     {
         if (blockCounter == null)
         {
-            Debug.LogError("BlockCounter nie jest ustawiony.");
+            // Debug.LogError("BlockCounter nie jest ustawiony.");
             return;
         }
 
